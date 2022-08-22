@@ -24,18 +24,20 @@ Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'NLKNguyen/papercolor-theme'
+
 Plug 'sainnhe/gruvbox-material'
 Plug 'tomasiser/vim-code-dark'
 Plug 'w0ng/vim-hybrid'
 Plug 'morhetz/gruvbox'
 Plug 'navarasu/onedark.nvim'
-Plug 'arcticicestudio/nord-vim'
-Plug 'junegunn/seoul256.vim'
+Plug 'jacoborus/tender.vim'
+Plug 'davidosomething/vim-colors-meh'
+Plug 'YorickPeterse/vim-paper'
+Plug 'jaredgorski/fogbell.vim'
+Plug 'Jorengarenar/vim-darkness'
 
 
 call plug#end()
-
 
 "Sets
 set encoding=UTF-8
@@ -99,7 +101,7 @@ inoremap kj <Esc>
 let g:vue_pre_processors = ['pug', 'scss']
 
 "theme and terminal color settings
-let g:airline_theme = 'onedark'
+let g:airline_theme = 'codedark'
 let g:onedark_config = {'style': 'darker'}
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -107,8 +109,10 @@ let g:airline_left_sep = "\uE0B8"
 let g:airline_right_sep = "\uE0BA"
 let g:airline_section_z = airline#section#create(["L" . '%{line(".")}' . ":C" . '%{col(".")}'])
 let g:startify_change_to_dir = 0
+let g:material_theme_style = 'darker-community'
+let g:material_terminal_italics = 1
 
 set background=dark
 set termguicolors
 
-color onedark
+color codedark
