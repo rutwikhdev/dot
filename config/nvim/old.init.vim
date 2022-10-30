@@ -1,41 +1,51 @@
 "Plugins
 call plug#begin('~/.vim/plugged')
 
+"git
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-Plug 'airblade/vim-gitgutter'
-Plug 'sheerun/vim-polyglot'
 Plug 'jiangmiao/auto-pairs'
-Plug 'preservim/nerdtree'
 Plug 'nicwest/vim-http'
-Plug 'posva/vim-vue'
-"Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'preservim/nerdcommenter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
+Plug 'stevearc/aerial.nvim'
+Plug 'airblade/vim-gitgutter'
+
+"lsp
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'ray-x/lsp_signature.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-Plug 'mhinz/vim-startify'
+"syntax hilighting
+Plug 'sheerun/vim-polyglot'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'junegunn/goyo.vim'
+Plug 'posva/vim-vue'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install --frozen-lockfile --production',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+
+"Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'sainnhe/gruvbox-material'
-Plug 'tomasiser/vim-code-dark'
-Plug 'w0ng/vim-hybrid'
-Plug 'morhetz/gruvbox'
-Plug 'navarasu/onedark.nvim'
-Plug 'jacoborus/tender.vim'
-Plug 'davidosomething/vim-colors-meh'
-Plug 'YorickPeterse/vim-paper'
-Plug 'jaredgorski/fogbell.vim'
-Plug 'Jorengarenar/vim-darkness'
+"flutter
+Plug 'nvim-lua/plenary.nvim'
+Plug 'akinsho/flutter-tools.nvim'
 
+"themes
+Plug 'doums/darcula'
+Plug 'arcticicestudio/nord-vim'
+Plug 'tomasiser/vim-code-dark'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'wuelnerdotexe/vim-enfocado'
+Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
+Plug 'ThePrimeagen/vim-be-good'
 
 call plug#end()
 
@@ -52,7 +62,7 @@ set backupcopy=yes
 set scrolloff=10
 set binary
 set noeol
-set noexpandtab
+set noet
 set autoread
 set showmatch
 set nohls
@@ -70,7 +80,8 @@ keeppatterns %s/\s\+$//e
 call winrestview(l:save)
 endfun
 "autocmd BufWritePre * :call TrimWhitespace()
-
+autocmd BufRead * autocmd FileType <buffer> ++once
+  \ if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"' | endif
 "Plugins setting
 "vim-http
 let g:vim_http_split_vertically = 1
@@ -101,18 +112,16 @@ inoremap kj <Esc>
 let g:vue_pre_processors = ['pug', 'scss']
 
 "theme and terminal color settings
-let g:airline_theme = 'codedark'
-let g:onedark_config = {'style': 'darker'}
+let g:airline_theme = 'gruvbox_material'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_left_sep = "\uE0B8"
-let g:airline_right_sep = "\uE0BA"
+let g:airline_left_sep = ""
+let g:airline_right_sep = ""
 let g:airline_section_z = airline#section#create(["L" . '%{line(".")}' . ":C" . '%{col(".")}'])
-let g:startify_change_to_dir = 0
-let g:material_theme_style = 'darker-community'
-let g:material_terminal_italics = 1
+"let g:startify_change_to_dir = 0
+let g:gruvbox_material_background = "hard"
+let g:enfocado_style = 'nature' " Available: `nature` or `neon`.
 
 set background=dark
 set termguicolors
-
-color codedark
+colorscheme gruvbox-material

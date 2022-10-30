@@ -1,20 +1,76 @@
--- Setup nvim-cmp.
-local cmp = require'cmp'
-local nvim_lsp = require'lspconfig'
-local treesitter = require'nvim-treesitter.configs'
+local Plug = vim.fn['plug#']
 
+vim.call('plug#begin', '~/.config/vim/plugged')
 
-local lsp_sig_config = {
-  hint_enable = false,
-  handler_opts = {
-    border = "none",
-  }
+Plug('tpope/vim-fugitive')
+Plug('tpope/vim-rhubarb')
+Plug('jiangmiao/auto-pairs')
+Plug('nicwest/vim-http')
+Plug('preservim/nerdcommenter')
+Plug('nvim-lua/plenary.nvim')
+Plug('nvim-telescope/telescope.nvim', {['tag'] = '0.1.0' })
+Plug('tpope/vim-surround')
+Plug('airblade/vim-gitgutter')
+Plug('ibhagwan/fzf-lua', {['branch'] = 'main'})
+--Plug ('kyazdani42/nvim-web-devicons')
+
+Plug('neovim/nvim-lspconfig')
+Plug('hrsh7th/cmp-nvim-lsp')
+Plug('hrsh7th/nvim-cmp')
+Plug('ray-x/lsp_signature.nvim')
+
+Plug('sheerun/vim-polyglot')
+Plug('nvim-treesitter/nvim-treesitter', { ['do'] = vim.fn[':TSUpdate']})
+Plug('junegunn/goyo.vim')
+Plug('posva/vim-vue')
+--Plug('prettier/vim-prettier', { ['do'] = vim.fc['yarn install --frozen-lockfile --production'], ['for'] = ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] })
+
+Plug('mhinz/vim-startify')
+Plug('ryanoasis/vim-devicons')
+Plug('vim-airline/vim-airline')
+Plug('vim-airline/vim-airline-themes')
+Plug 'nvim-lualine/lualine.nvim'
+
+Plug('nvim-lua/plenary.nvim')
+Plug('akinsho/flutter-tools.nvim')
+
+Plug('doums/darcula')
+Plug('arcticicestudio/nord-vim')
+Plug('tomasiser/vim-code-dark')
+Plug('NLKNguyen/papercolor-theme')
+Plug('wuelnerdotexe/vim-enfocado')
+Plug('morhetz/gruvbox')
+Plug('sainnhe/gruvbox-material')
+Plug('ThePrimeagen/vim-be-good')
+
+vim.call('plug#end')
+
+-- Variables
+vim.g['startify_change_to_dir'] = 0
+vim.g['gruvbox_material_background'] = "hard"
+vim.g['enfocado_style'] = 'nature'
+
+-- lualine setup
+require('lualine').setup {
+    options = {
+        icons_enabled = true,
+        theme = 'gruvbox-material',
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
+    },
+    tabline = {
+        lualine_a = {'buffers'},
+        lualine_b = {'branch'},
+    }
 }
+
+-- lsp setup
+local cmp = require('cmp')
+local nvim_lsp = require('lspconfig')
 
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
@@ -36,13 +92,13 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>lq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
   -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
     buf_set_keymap("n", "<space>lf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  elseif client.resolved_capabilities.document_range_formatting then
+  elseif client.server_capabilities.document_range_formatting then
     buf_set_keymap("n", "<space>lf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
   -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.document_highlight then
     vim.api.nvim_exec([[
       hi LspReferenceRead cterm=bold ctermbg=red guibg=#44475a
       hi LspReferenceText cterm=bold ctermbg=red guibg=#44475a
@@ -55,9 +111,13 @@ local on_attach = function(client, bufnr)
     ]], false)
   end
 
-  require "lsp_signature".on_attach(lsp_sig_config)
+  require "lsp_signature".on_attach({
+    hint_enable = false,
+    handler_opts = {
+      border = "none",
+    }
+  })
 end
-
 
 cmp.setup({
     snippet = {
@@ -83,9 +143,8 @@ cmp.setup({
     }
 })
 
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 nvim_lsp['pyright'].setup {
-  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+  capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
   on_attach=on_attach,
   settings = {
     python = {
@@ -99,16 +158,18 @@ nvim_lsp['pyright'].setup {
 	}
 }
 
-treesitter.setup {
+nvim_lsp.tsserver.setup {
+  on_attach=on_attach
+}
+
+require('nvim-treesitter.configs').setup {
   highlight = {
-    enable = true,
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
+    enable = false,
     additional_vim_regex_highlighting = false,
   },
   indent = {
     enable = true,
   }
 }
+
+--require("flutter-tools").setup{}
