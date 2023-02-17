@@ -119,7 +119,7 @@ let g:airline_left_sep = ""
 let g:airline_right_sep = ""
 let g:airline_section_z = airline#section#create(["L" . '%{line(".")}' . ":C" . '%{col(".")}'])
 "let g:startify_change_to_dir = 0
-let g:gruvbox_material_background = "hard"
+let g:gruvbox_material_background = "soft"
 let g:enfocado_style = 'nature' " Available: `nature` or `neon`.
 
 set background=dark
