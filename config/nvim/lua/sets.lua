@@ -5,7 +5,7 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.showmode = false
 vim.o.swapfile = false
-vim.cmd('filetype plugin on')
+vim.cmd("filetype plugin on")
 --vim.o.singlecolumn = true
 vim.o.binary = true
 vim.o.eol = false
@@ -25,5 +25,5 @@ vim.o.updatetime = 100
 vim.o.termguicolors = true
 vim.o.ch = 0
 --Lua:
-vim.o.background = 'dark'
+vim.o.background = "dark"
 vim.cmd([[colorscheme kanagawa-dragon]])

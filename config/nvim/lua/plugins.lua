@@ -17,12 +17,12 @@ local plugins = {
 	"rebelot/kanagawa.nvim",
 	"tpope/vim-fugitive",
 	{
-  'glepnir/dashboard-nvim',
-		event = 'VimEnter',
+		"glepnir/dashboard-nvim",
+		event = "VimEnter",
 		config = function()
-			require('dashboard').setup {
+			require("dashboard").setup({
 				-- config
-			}
+			})
 		end,
 	},
 	{
@@ -144,20 +144,31 @@ local plugins = {
 		event = "VeryLazy",
 		config = function()
 			require("mason-lspconfig").setup({
-					config = {
-						shortcut = {
-							-- action can be a function type
-							{ desc = string, group = 'highlight group', key = 'shortcut key', action = 'action when you press key' },
+				config = {
+					shortcut = {
+						-- action can be a function type
+						{
+							desc = string,
+							group = "highlight group",
+							key = "shortcut key",
+							action = "action when you press key",
 						},
-						packages = { enable = true }, -- show how many plugins neovim loaded
-						-- limit how many projects list, action when you press key or enter it will run this action.
-						-- action can be a functino type, e.g.
-						-- action = func(path) vim.cmd('Telescope find_files cwd=' .. path) end
-						project = { enable = true, limit = 8, icon = 'your icon', label = '', action = 'Telescope find_files cwd=' },
-						mru = { limit = 10, icon = 'your icon', label = '', },
-						footer = {}, -- footer
-					}
-				})
+					},
+					packages = { enable = true }, -- show how many plugins neovim loaded
+					-- limit how many projects list, action when you press key or enter it will run this action.
+					-- action can be a functino type, e.g.
+					-- action = func(path) vim.cmd('Telescope find_files cwd=' .. path) end
+					project = {
+						enable = true,
+						limit = 8,
+						icon = "your icon",
+						label = "",
+						action = "Telescope find_files cwd=",
+					},
+					mru = { limit = 10, icon = "your icon", label = "" },
+					footer = {}, -- footer
+				},
+			})
 		end,
 	},
 	"neovim/nvim-lspconfig",
@@ -235,11 +246,11 @@ local opts = {}
 
 require("lazy").setup(plugins, opts)
 
-	-- Mappings.
-	local opts = {
-		noremap = true,
-		silent = true,
-	}
+-- Mappings.
+local opts = {
+	noremap = true,
+	silent = true,
+}
 
 -- variables
 vim.g.fzf_layout = {
@@ -405,7 +416,6 @@ local on_attach = function(_, bufnr)
 		desc = "Format current buffer with LSP",
 	})
 end
-
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
