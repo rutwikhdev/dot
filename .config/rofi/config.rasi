@@ -1,0 +1,12 @@
+configuration {
+ modi: "window,drun,ssh,combi";
+ font: "FiraCode Nerd Font Mono 16";
+ combi-modi: "window,drun,ssh";
+}
+
+window {
+	width: 40%;
+	height: 500px;
+}
+
+@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"

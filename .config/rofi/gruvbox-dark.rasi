@@ -16,6 +16,7 @@
     highlight: bold italic;
     scrollbar: true;
 
+    font-size: 42px;
     /* Gruvbox dark colors */
     gruvbox-dark-bg0:          #282828;
     gruvbox-dark-bg0-soft:     #32302f;

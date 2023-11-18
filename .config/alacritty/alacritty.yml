@@ -1,0 +1,217 @@
+# Colors oh-lucy
+window:
+  decorations: None
+  energy: Performance
+  opacity: 0.88 #From 0.00 to 1.00
+
+schemes:
+  lucy: &lucy
+    primary:
+      background: '#1E1D23'
+      foreground: '#DED7D0'
+    normal:
+      black:   '#938884'
+      red:     '#FF7DA3'
+      green:   '#7EC49D'
+      yellow:  '#EFD472'
+      blue:    '#8BB8D0'
+      magenta: '#BDA9D4'
+      cyan:    '#BDA9D4'
+      white:   '#DED7D0'
+    bright:
+      black:   '#938884'
+      red:     '#FF7DA3'
+      green:   '#7EC49D'
+      yellow:  '#EFD472'
+      blue:    '#8BB8D0'
+      magenta: '#BDA9D4'
+      cyan:    '#BDA9D4'
+      white:   '#DED7D0'
+  onedark: &onedark
+    primary:
+      background: '0x1e2127'
+      foreground: '0xabb2bf'
+
+      # Bright and dim foreground colors
+      #
+      # The dimmed foreground color is calculated automatically if it is not present.
+      # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
+      # is `false`, the normal foreground color will be used.
+      #dim_foreground: '0x9a9a9a'
+      bright_foreground: '0xe6efff'
+
+    # Cursor colors
+    #
+    # Colors which should be used to draw the terminal cursor. If these are unset,
+    # the cursor color will be the inverse of the cell color.
+    #cursor:
+    #  text: '0x000000'
+    #  cursor: '0xffffff'
+
+    # Normal colors
+    normal:
+      black:   '0x1e2127'
+      red:     '0xe06c75'
+      green:   '0x98c379'
+      yellow:  '0xd19a66'
+      blue:    '0x61afef'
+      magenta: '0xc678dd'
+      cyan:    '0x56b6c2'
+      white:   '0x828791'
+
+    # Bright colors
+    bright:
+      black:   '0x5c6370'
+      red:     '0xe06c75'
+      green:   '0x98c379'
+      yellow:  '0xd19a66'
+      blue:    '0x61afef'
+      magenta: '0xc678dd'
+      cyan:    '0x56b6c2'
+      white:   '0xe6efff'
+
+    # Dim colors
+    #
+    # If the dim colors are not set, they will be calculated automatically based
+    # on the `normal` colors.
+    dim:
+      black:   '0x1e2127'
+      red:     '0xe06c75'
+      green:   '0x98c379'
+      yellow:  '0xd19a66'
+      blue:    '0x61afef'
+      magenta: '0xc678dd'
+      cyan:    '0x56b6c2'
+      white:   '0x828791'
+
+  material: &material
+    # Default colors
+    primary:
+      background: '0x212121'
+      foreground: '0xeeffff'
+
+    # Colors the cursor will use if `custom_cursor_colors` is true
+    cursor:
+      text: '0x212121'
+      cursor: '0xeeffff'
+
+    # Normal colors
+    normal:
+      black:   '0x212121'
+      red:     '0xf07178'
+      green:   '0xc3e88d'
+      yellow:  '0xffcb6b'
+      blue:    '0x82aaff'
+      magenta: '0xc792ea'
+      cyan:    '0x89ddff'
+      white:   '0xeeffff'
+
+    # Bright colors
+    bright:
+      black:   '0x4a4a4a'
+      red:     '0xf78c6c'
+      green:   '0x303030'
+      yellow:  '0x353535'
+      blue:    '0xb2ccd6'
+      magenta: '0xeeffff'
+      cyan:    '0xff5370'
+      white:   '0xffffff'
+
+  nord: &nord
+    primary:
+      background: "#2e3440"
+      foreground: "#d8dee9"
+      dim_foreground: "#a5abb6"
+    cursor:
+      text: "#2e3440"
+      cursor: "#d8dee9"
+    vi_mode_cursor:
+      text: "#2e3440"
+      cursor: "#d8dee9"
+    selection:
+      text: CellForeground
+      background: "#4c566a"
+    search:
+      matches:
+        foreground: CellBackground
+        background: "#88c0d0"
+      footer_bar:
+        background: "#434c5e"
+        foreground: "#d8dee9"
+    normal:
+      black: "#3b4252"
+      red: "#bf616a"
+      green: "#a3be8c"
+      yellow: "#ebcb8b"
+      blue: "#81a1c1"
+      magenta: "#b48ead"
+      cyan: "#88c0d0"
+      white: "#e5e9f0"
+    bright:
+      black: "#4c566a"
+      red: "#bf616a"
+      green: "#a3be8c"
+      yellow: "#ebcb8b"
+      blue: "#81a1c1"
+      magenta: "#b48ead"
+      cyan: "#8fbcbb"
+      white: "#eceff4"
+    dim:
+      black: "#373e4d"
+      red: "#94545d"
+      green: "#809575"
+      yellow: "#b29e75"
+      blue: "#68809a"
+      magenta: "#8c738c"
+      cyan: "#6d96a5"
+      white: "#aeb3bb"
+  ### Nord ###
+  Nord: &Nord
+    # Default colors
+    primary:
+      background: '#2E3440'
+      foreground: '#D8DEE9'
+
+    # Normal colors
+    normal:
+      black:   '#3B4252'
+      red:     '#BF616A'
+      green:   '#A3BE8C'
+      yellow:  '#EBCB8B'
+      blue:    '#81A1C1'
+      magenta: '#B48EAD'
+      cyan:    '#88C0D0'
+      white:   '#E5E9F0'
+
+    # Bright colors
+    bright:
+      black:   '#4C566A'
+      red:     '#BF616A'
+      green:   '#A3BE8C'
+      yellow:  '#EBCB8B'
+      blue:    '#81A1C1'
+      magenta: '#B48EAD'
+      cyan:    '#8FBCBB'
+      white:   '#ECEFF4'
+
+
+# Apply the color scheme.
+# colors: *lucy
+
+
+font:
+  # The font family
+  normal:
+    family: SFMono Nerd Font
+    # family: FiraCode Nerd Font Mono
+    style: Regular
+  size: 13
+
+  bold:
+    family: JetBrainsMono Nerd Font Mono
+    # family: FiraCode Nerd Font Mono
+    style: Medium
+
+  offset:
+    x: 0
+    y: 12
