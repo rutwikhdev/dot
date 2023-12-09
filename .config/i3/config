@@ -4,7 +4,7 @@ for_window [floating] border pixel 0
 set $mod Mod4
 
 # wallpaper
-exec_always --no-startup-id "feh --bg-fill /home/razorquest/Downloads/walls/samurai.jpg"
+exec_always --no-startup-id "feh --bg-fill /home/razorquest/Downloads/walls/chaironomura.jpg"
 
 font pango:Fira Mono 8
 
@@ -39,10 +39,10 @@ bindsym Control+Return exec --no-startup-id kitty
 bindsym $mod+Shift+q kill
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
