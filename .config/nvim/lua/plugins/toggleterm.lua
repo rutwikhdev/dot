@@ -1,8 +1,8 @@
 return {
-  "akinsho/toggleterm.nvim",
-  version = "*",
+  'akinsho/toggleterm.nvim',
+  version = '*',
   config = function()
-    require("toggleterm").setup {
+    require('toggleterm').setup {
       size = 20,
       open_mapping = [[<c-\>]],
       shade_filetypes = {},
@@ -10,15 +10,15 @@ return {
       shading_factor = 1,
       start_in_insert = true,
       persist_size = true,
-      direction = "horizontal",
+      direction = 'horizontal',
       close_on_exit = true,
       shell = vim.o.shell,
       float_opts = {
-        border = "curved",
+        border = 'curved',
         winblend = 3,
         highlights = {
-          border = "Normal",
-          background = "Normal",
+          border = 'Normal',
+          background = 'Normal',
         },
       },
     }

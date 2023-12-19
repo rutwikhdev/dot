@@ -18,7 +18,6 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -33,10 +32,6 @@ require('lazy').setup({
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
 
-      -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
-
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
@@ -46,15 +41,8 @@ require('lazy').setup({
     -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
-
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
-
-      -- Adds a number of user-friendly snippets
-      'rafamadriz/friendly-snippets',
     },
   },
 
@@ -63,6 +51,9 @@ require('lazy').setup({
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
+
+  -- surround text with symbols
+  { 'tpope/vim-surround' },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -95,6 +86,9 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
+-- Auto read file when changed from outside
+vim.o.autoread = true
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
@@ -110,23 +104,14 @@ vim.o.mouse = 'a'
 --  See `:help 'clipboard'`
 vim.o.clipboard = 'unnamedplus'
 
--- Enable break indent
-vim.o.breakindent = true
-
 -- Always have at least 15 lines visible top and bottom
 vim.o.scrolloff = 15
-
--- Fast cursor
-vim.o.updatetime = 100
 
 -- Tab
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = false
-
--- Save undo history
-vim.o.undofile = true
-
+vim.o.eol = false
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -135,8 +120,7 @@ vim.o.smartcase = true
 vim.wo.signcolumn = 'yes'
 
 -- Decrease update time
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
+vim.o.updatetime = 100
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -148,29 +132,28 @@ vim.o.termguicolors = true
 vim.o.ch = 0
 
 -- Alternate escape
-vim.keymap.set("i", "kj", "<Esc>")
+vim.keymap.set('i', 'kj', '<Esc>')
 
 -- Assembly syntax highlighting
-vim.cmd('autocmd BufNewFile,BufRead *.asm setfiletype asm')
+vim.cmd 'autocmd BufNewFile,BufRead *.asm setfiletype asm'
 
 -- color schemes
-vim.cmd.colorscheme('kanagawa')
-
+vim.cmd.colorscheme 'material-darker'
 
 -- [[ Basic Keymaps ]]
 -- Move blocks and lines up and down
-vim.keymap.set("v", "<A-S-k>", ":m '<-2<CR>gv=gv", {silent = true})
-vim.keymap.set("v", "<A-S-j>", ":m '>+1<CR>gv=gv", {silent = true})
-vim.keymap.set("n", "<A-S-j>", ":m .+1<CR>==", {silent = true})
-vim.keymap.set("n", "<A-S-k>", ":m .-2<CR>==", {silent = true})
-vim.keymap.set("i", "<A-S-k>", "<Esc>:m .-2<CR>==gi", {silent = true})
-vim.keymap.set("i", "<A-S-j>", "<Esc>:m .+1<CR>==gi", {silent = true})
+vim.keymap.set('v', '<A-S-k>', ":m '<-2<CR>gv=gv", { silent = true })
+vim.keymap.set('v', '<A-S-j>', ":m '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set('n', '<A-S-j>', ':m .+1<CR>==', { silent = true })
+vim.keymap.set('n', '<A-S-k>', ':m .-2<CR>==', { silent = true })
+vim.keymap.set('i', '<A-S-k>', '<Esc>:m .-2<CR>==gi', { silent = true })
+vim.keymap.set('i', '<A-S-j>', '<Esc>:m .+1<CR>==gi', { silent = true })
 
 -- Neotree
-vim.keymap.set("n", "<leader>pv", vim.cmd.Neotree)
+vim.keymap.set('n', '<leader>pv', vim.cmd.Neotree)
 
 -- Fugitige
-vim.keymap.set("n", "<leader>gs", vim.cmd.G)
+vim.keymap.set('n', '<leader>gs', vim.cmd.G)
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -199,21 +182,21 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
-local telescope_actions = require('telescope.actions')
+local telescope_actions = require 'telescope.actions'
 require('telescope').setup {
   defaults = {
     layout_strategy = 'vertical',
     layout_config = {
-      preview_cutoff = 10,
+      preview_cutoff = 20,
       height = 0.98,
       width = 0.98,
     },
     mappings = {
       i = {
-        ["<esc>"] = telescope_actions.close,
-        ["<C-j>"] = telescope_actions.move_selection_next,
-        ["<C-k>"] = telescope_actions.move_selection_previous
-      }
+        ['<esc>'] = telescope_actions.close,
+        ['<C-j>'] = telescope_actions.move_selection_next,
+        ['<C-k>'] = telescope_actions.move_selection_previous,
+      },
     },
   },
 }
@@ -229,17 +212,17 @@ local function find_git_root()
   local current_dir
   local cwd = vim.fn.getcwd()
   -- If the buffer is not associated with a file, return nil
-  if current_file == "" then
+  if current_file == '' then
     current_dir = cwd
   else
     -- Extract the directory from the current file's path
-    current_dir = vim.fn.fnamemodify(current_file, ":h")
+    current_dir = vim.fn.fnamemodify(current_file, ':h')
   end
 
   -- Find the Git root directory from the current file's path
-  local git_root = vim.fn.systemlist("git -C " .. vim.fn.escape(current_dir, " ") .. " rev-parse --show-toplevel")[1]
+  local git_root = vim.fn.systemlist('git -C ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel')[1]
   if vim.v.shell_error ~= 0 then
-    print("Not a git repository. Searching on current working directory")
+    print 'Not a git repository. Searching on current working directory'
     return cwd
   end
   return git_root
@@ -249,9 +232,9 @@ end
 local function live_grep_git_root()
   local git_root = find_git_root()
   if git_root then
-    require('telescope.builtin').live_grep({
-      search_dirs = {git_root},
-    })
+    require('telescope.builtin').live_grep {
+      search_dirs = { git_root },
+    }
   end
 end
 
@@ -273,6 +256,7 @@ vim.keymap.set('n', '<leader>f', require('telescope.builtin').find_files, { desc
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>j', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>h', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
@@ -406,31 +390,23 @@ require('which-key').register {
 require('mason').setup()
 require('mason-lspconfig').setup()
 
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
---
---  If you want to override the default filetypes that your language server will attach to you can
---  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-      -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-      -- diagnostics = { disable = { 'missing-fields' } },
+  pyright = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        typeCheckingMode = 'off',
+        diagnosticMode = 'openFilesOnly',
+      },
     },
   },
-  pyright = {}
+  tsserver = {},
 }
 
 -- Setup neovim lua configuration
@@ -461,22 +437,14 @@ mason_lspconfig.setup_handlers {
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require 'cmp'
-local luasnip = require 'luasnip'
-require('luasnip.loaders.from_vscode').lazy_load()
-luasnip.config.setup {}
 
 cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
   completion = {
-    completeopt = 'menu,menuone,noinsert'
+    completeopt = 'menu,menuone,noinsert',
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-j>'] = cmp.mapping.select_next_item(),
+    ['<C-k>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
@@ -487,8 +455,6 @@ cmp.setup {
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
       else
         fallback()
       end
@@ -496,8 +462,6 @@ cmp.setup {
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
       else
         fallback()
       end
@@ -505,7 +469,6 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'luasnip' },
   },
 }
 

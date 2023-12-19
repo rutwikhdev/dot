@@ -3,12 +3,7 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-  "kvrohit/mellow.nvim",
-  "folke/tokyonight.nvim",
-  "rebelot/kanagawa.nvim",
-  "nyoom-engineering/nyoom.nvim",
-  "nyoom-engineering/oxocarbon.nvim",
-  "olivercederborg/poimandres.nvim",
-  "ramojus/mellifluous.nvim",
-  "Yazeed1s/oh-lucy.nvim"
+  'marko-cerovac/material.nvim',
+  'rebelot/kanagawa.nvim',
+  'Yazeed1s/oh-lucy.nvim',
 }
