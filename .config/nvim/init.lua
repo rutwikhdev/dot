@@ -138,7 +138,7 @@ vim.keymap.set('i', 'kj', '<Esc>')
 vim.cmd 'autocmd BufNewFile,BufRead *.asm setfiletype asm'
 
 -- color schemes
-vim.cmd.colorscheme 'material-darker'
+vim.cmd.colorscheme 'dracula-soft'
 
 -- [[ Basic Keymaps ]]
 -- Move blocks and lines up and down
@@ -150,7 +150,7 @@ vim.keymap.set('i', '<A-S-k>', '<Esc>:m .-2<CR>==gi', { silent = true })
 vim.keymap.set('i', '<A-S-j>', '<Esc>:m .+1<CR>==gi', { silent = true })
 
 -- Neotree
-vim.keymap.set('n', '<leader>pv', vim.cmd.Neotree)
+vim.keymap.set('n', '<leader>pv', '<cmd>:Neotree toggle<CR>', { silent = true })
 
 -- Fugitige
 vim.keymap.set('n', '<leader>gs', vim.cmd.G)

@@ -3,6 +3,7 @@
 --
 -- See the kickstart.nvim README for more information
 return {
+  'Mofiqul/dracula.nvim',
   'marko-cerovac/material.nvim',
   'rebelot/kanagawa.nvim',
   'Yazeed1s/oh-lucy.nvim',

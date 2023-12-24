@@ -37,14 +37,6 @@ if [ -e /home/razorquest/.nix-profile/etc/profile.d/nix.sh ]; then . /home/razor
 
 export PATH=$PATH:/usr/local/go/bin
 
-# # bun completions
-# [ -s "/home/razorquest/.bun/_bun" ] && source "/home/razorquest/.bun/_bun"
-#
-# # bun
-# export BUN_INSTALL="$HOME/.bun"
-# export PATH="$BUN_INSTALL/bin:$PATH"
-# fpath=($fpath "/home/razorquest/.zfunctions")
-
 export OBSIDIAN_USE_WAYLAND=1
 export MOZ_ENABLE_WAYLAND=1
 
