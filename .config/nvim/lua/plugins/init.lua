@@ -1,10 +1,15 @@
--- You can add your own plugins here or in other files in this directory!
---  I promise not to create any merge conflicts in this directory :)
---
--- See the kickstart.nvim README for more information
+-- Plugins that don't require configuration
+
 return {
-  'Mofiqul/dracula.nvim',
-  'marko-cerovac/material.nvim',
-  'rebelot/kanagawa.nvim',
-  'Yazeed1s/oh-lucy.nvim',
+  -- Git related plugins
+  'tpope/vim-fugitive',
+
+  -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth',
+
+  -- "gc" to comment visual regions/lines
+  { 'numToStr/Comment.nvim', opts = {} },
+
+  -- surround text with symbols
+  { 'tpope/vim-surround' },
 }

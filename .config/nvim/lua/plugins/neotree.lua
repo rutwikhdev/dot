@@ -7,11 +7,13 @@ return {
     'MunifTanjim/nui.nvim',
   },
   opts = {
-    window = {
-      position = 'right',
-    },
   },
   config = function()
-    require('neo-tree').setup {}
+    require('neo-tree').setup {
+      window = {
+        position = 'right',
+        width = 40,
+      },
+    }
   end,
 }

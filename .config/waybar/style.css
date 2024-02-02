@@ -1,19 +1,19 @@
 * {
 	border: none;
 	border-radius: 0;
-	font-family: 'FontAwesome', 'Fira Mono';
+	font-family: 'FontAwesome', 'FiraCode Nerd Font Mono';
 	font-size: 13px;
-	font-weight: bold;
+	font-weight: 400;
 	min-height: 0;
 }
 
 #waybar {
 	background-color: #191818;
-	transition-duration: .5s;
+	transition: all 0.3s ease;
 }
 
 #workspaces button {
-	padding: 0 12px;
+	padding: 0 6px;
 	color: #d2d2d2;
 }
 
@@ -24,8 +24,8 @@
 }
 
 #workspaces button.focused {
-	color: #d2d2d2;
-	border-bottom:4px solid #d2d2d2;
+	background-color: #d2d2d2;
+	color: black;
 }
 
 #workspaces button.urgent {
@@ -39,7 +39,7 @@
 }
 
 #tray, #pulseaudio, #network, #backlight, #battery, #clock {
-	padding: 0 12px;
+	padding: 0 8px;
 	color: #d2d2d2;
 }
 
