@@ -2,10 +2,11 @@
 set $term kitty
 
 # system font
-font pango: Fira Mono 10
+font pango: SF Pro Display 10
 
 # external monitor scale 1.25x
 output HDMI-A-1 scale 1.25
+output eDP-1 scale 1.75
 
 ### Variables
 # Super key. Use Mod1 for Alt.
@@ -20,14 +21,15 @@ set $right l
 # app launcher
 set $menu "rofi -combi-modi window,drun,run -show combi -show-icons"
 bindsym Mod1+space exec "rofi -show filebrowser -show-icons"
-set $wall "~/Downloads/walls/darkmountains.jpeg"
+set $wall "~/Downloads/walls/hallow.png"
 
 output * bg $wall fill
 
 default_border pixel 0
-smart_borders no_gaps
+# smart_borders gaps
 hide_edge_borders none
 for_window [class="^.*"] border pixel 0
+
 
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
@@ -39,7 +41,7 @@ exec_always evremap remap ~/.config/evremap/evremap.toml
 
 # gaps
 gaps inner 0
-gaps outer 0
+#gaps outer 5
 
 ### Input configuration - swaymsg -t get_inputs
 # touchpad
@@ -208,6 +210,7 @@ exec nm-applet
 exec blueman-applet
 
 # screenshot
+# bindsym $mod+Shift+s exec grim -g "$(slurp)" /home/cherry/Pictures/Screenshots/"$(date +%Y%m%d-%H%M%S)".png | wl-copy
 bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
 
 # eDP-1 enable/disable display
@@ -215,14 +218,15 @@ bindsym $mod+m exec wlr-randr --output eDP-1 --off
 bindsym $mod+Shift+m exec wlr-randr --output eDP-1 --on
 
 # obsidian
-bindsym $mod+Shift+o exec flatpak run --socket=wayland md.obsidian.Obsidian
+bindsym $mod+Shift+o exec flatpak run --socket=wayland md.obsidian.Obsidian -enable-features=UseOzonePlatform -ozone-platform=wayland
+# bindsym $mod+Shift+o exec OBSIDIAN_USE_WAYLAND=1 ./Obsidian-1.5.3.AppImage -enable-features=UseOzonePlatform -ozone-platform=wayland
 bindsym $mod+Shift+b exec "flatpak run --socket=wayland org.mozilla.firefox"
 
 # Telegram
 bindsym $mod+Shift+t exec "~/./Apps/Telegram"
 
 # lock
-set $lock_bg ~/Downloads/walls/darkmountains.jpeg
+set $lock_bg ~/Downloads/walls/fedora.jpg
 bindsym $mod+o exec swaylock -i $lock_bg
 
 # sleep, suspend and resume
@@ -231,6 +235,9 @@ exec swayidle -w \
         timeout 900 'swaymsg "output * dpms off"' \
         resume 'swaymsg "output * dpms on"' \
         before-sleep 'swaylock -f -c 000000 -i $lock_bg' \
+
+for_window [app_id="firefox"] inhibit_idle fullscreen
+
 
 bar {
     swaybar_command waybar

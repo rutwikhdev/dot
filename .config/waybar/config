@@ -1,80 +1,108 @@
 {
+	"layer": "top",	
+	"position": "top",
+    "height": 24,
+	"mode": "dock",
 
-"height": 20,
-"position":"top",
-"modules-left": ["sway/workspaces", "sway/mode"],
-"modules-center": ["sway/window"],
-"modules-right": ["network", "pulseaudio", "backlight", "battery", "clock", "tray"],
+    "modules-left": ["hyprland/workspaces", "sway/workspaces", "custom/scratch", "sway/mode", "sway/window"],
+    "modules-center": [],
+    "modules-right": ["network", "backlight", "pulseaudio", "battery", "clock", "tray"],
 
-"sway/workspaces": {
-"all-outputs": true,
-"format": "{icon}",
-"format-icons": {
-	"1": "1",
-	"2": "2",
-	"3": "3",
-	"4": "4",
-	"5": "5",
-	"6": "6",
-	"7": "7",
-	"8": "8",
-	"urgent": "  ",
-	"default": "  "
+	"hyprland/workspaces": {
+		"format": "{id}",
+		 "on-scroll-up": "hyprctl dispatch workspace e+1",
+		 "on-scroll-down": "hyprctl dispatch workspace e-1"
 	},
-},
 
-"sway/mode": {
-	"format": "<span style=\"italic\">{}</span>"
-},
+	"hyprland/window": {
+		"format": "👉 {}",
+		"rewrite": {
+			"(.*) — Mozilla Firefox": "🌎 $1",
+			"(.*) - fish": "> [$1]"
+		},
+		"separate-outputs": true
+	},
 
-"tray": {
-	"icon-size": 22,
-	"spacing": 10
-},
+	"sway/workspaces": {
+        "disable-scroll": true,
+        "disable-markup": true,
+        "format": "{index}" 
+	},
 
-"clock": {
-	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-	"format-alt": "{:%Y-%m-%d}"
-},
 
-"backlight": {
-        "format": "{percent}% {icon}",
-	"format-icons": [" ", " "]
-},
+	"sway/window": {
+    	"format": "{}",
+    	"max-length": 150
+	},
 
-"battery": {
-	"states": {
-		"good": 95,
-		"warning": 30,
-		"critical": 15
-},
-	"format": "{capacity}% {icon}",
-	"format-charging": "{capacity}%  ",
-	"format-icons": [" ", " ", " ", " ", " "]
-},
 
-"network": {
-	"format-wifi": "({signalStrength}%)  ",
-        "format-ethernet": "{ipaddr}/{cidr}  ",
-        "tooltip-format": "{ifname} via {gwaddr}  ",
-        "format-linked": "{ifname} (No IP)  ",
-        "format-disconnected": "Disconnected ⚠ ",
-},
+	"custom/scratch": {
+   		"interval": 3,
+   		"exec": "swaymsg -t get_tree | jq 'recurse(.nodes[]) | first(select(.name==\"__i3_scratch\")) | .floating_nodes | length | select(. >= 0)'",
+   		"format": "^{}", 
+   		"on-click": "swaymsg 'scratchpad show'",
+   		"on-click-right": "swaymsg 'move scratchpad'"
+	},
 
-"pulseaudio": {
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 15
+	},
+
+
+    "clock": {
+        "format": "{:%a %b %e,  %R}",
+        "interval": 30
+	},
+
+    
+    "battery": {
+        "bat": "BAT0",
+        "states": {
+              "full": 99,
+              "good": 98,
+              "normal": 98,
+              "warning": 20,
+              "critical": 20
+		},
+
+        "format": "{icon}  {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-good": "{icon}  {capacity}%", 
+        "format-full": "   {capacity}%",
+		"format-icons": ["", "", "", "", ""],
+        "interval": 30
+	},
+
+
+    "network": {
+        "interface": "wlp2s0", 
+        "format-wifi": "  {essid}",
+        "format-disconnected": "睊   Disconnected",
+        "interval": 60
+	},
+
+
+	"backlight": {
+    	"device": "intel_backlight",
+    	"format": "{icon} {percent}%  ",
+        "format-icons": ["","","","", "", "", ""],
+    	"interval": 60
+	},
+
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%  ",
+        "format-bluetooth": " {volume}%  ",
+        "format-muted":"婢Mute",
+        "interval": 60,
+
         "format-icons": {
-            "headphone": " ",
-            "hands-free": " ",
-            "headset": " ",
-            "phone": " ",
-            "portable": " ",
-            "car": " ",
-            "default": [" ", " ", " "]
-			},
-},
-}
+			"default": ["奄"]
+		},
+            
+       "on-click": "pavucontrol",
+	}
 
+}
